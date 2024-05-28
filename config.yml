@@ -1,0 +1,21 @@
+INDEX_CSV_PATH: ./data_num_path.csv
+
+DATASET_DIR: path/to/dataset
+
+# The pkl file to save, which contains motion id and corresponding snippet
+MID_SNIP_DICT_DIR: /data/splits
+
+DEVICE: cuda:3
+DTYPE: float64
+BATCH_SIZE: 512
+FPS: 10
+ROLLOUT: 4 # Rollout steps in scheduled sampling
+PAST_KF: 1
+FUTURE_KF: 1
+
+# NPY_SAVE_DIR: ../../datasets/amass_custom1
+NPY_SAVE_DIR: path/to/save # Saves the processed motion data
+
+# Path to smplh_model/male_or_female/model.npz
+MALE_BM_PATH: smplh_model/male/model.npz
+FEMALE_BM_PATH: smplh_model/female/model.npz
