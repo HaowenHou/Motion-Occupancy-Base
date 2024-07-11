@@ -1,6 +1,6 @@
-# Revisit Human-Scene Interaction via Space Occupancy
+# Motion Occupancy Base 
 
-Official repository of Revisit Human-Scene Interaction via Space Occupancy.
+Official repository for gathering data of [*Revisit Human-Scene Interaction via Space Occupancy*](https://arxiv.org/abs/2312.02700) (ECCV 2024).
 
 This repository specifies the pipeline for gathering Motion Occupancy Base (MOB).
 
@@ -12,7 +12,7 @@ Create a conda environment from `environment.yml`: `conda env create -f environm
 
 ### Gather existing datasets
 
-For the datasets in AMASS, download from [AMASS](https://amass.is.tue.mpg.de/), and put them under a directory like below:
+This tutorial takes AMASS as an example. For the datasets in AMASS, download from [AMASS](https://amass.is.tue.mpg.de/), and put them under a directory like below:
 
 ```
 .
@@ -62,3 +62,16 @@ For the datasets in AMASS, download from [AMASS](https://amass.is.tue.mpg.de/), 
 3. Process the data and save
 
     Run `generate_data.py`, which processes the data snippets, and saves them into `.npy` files.
+
+## Citation
+
+BibTeX:
+
+```BibTeX
+@article{liu2023revisit,
+  title={Revisit Human-Scene Interaction via Space Occupancy},
+  author={Liu, Xinpeng and Hou, Haowen and Yang, Yanchao and Li, Yong-Lu and Lu, Cewu},
+  journal={arXiv preprint arXiv:2312.02700},
+  year={2023}
+}
+```
