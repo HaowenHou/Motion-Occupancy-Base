@@ -1,6 +1,6 @@
 # Motion Occupancy Base 
 
-Official repository for gathering data of [*Revisit Human-Scene Interaction via Space Occupancy*](https://arxiv.org/abs/2312.02700) (ECCV 2024).
+Official repository for gathering data of [*Revisit Human-Scene Interaction via Space Occupancy*](https://foruck.github.io/occu-page/) (ECCV 2024).
 
 This repository specifies the pipeline for gathering Motion Occupancy Base (MOB).
 
@@ -62,6 +62,8 @@ This tutorial takes AMASS as an example. For the datasets in AMASS, download fro
 3. Process the data and save
 
     Run `generate_data.py`, which processes the data snippets, and saves them into `.npy` files.
+    
+    Here are some sample npy files processed from AMASS: [Google Drive link](https://drive.google.com/drive/folders/1VC4FJnfARNQbdYiaVKjHMnRAGjXvXNHp?usp=sharing)
 
 ## Citation
 
