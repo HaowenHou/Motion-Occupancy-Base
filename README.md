@@ -78,7 +78,7 @@ Create the conda env from `environment.yml`.
 Download SMPL models and put them in `datasets/smpl_models`:
 
 <p align="center">
-    <img src="https://github.com/HaowenHou/Motion-Occupancy-Base/blob/main/media/smpls.png?raw=true" width="90%">
+    <img src="https://github.com/HaowenHou/Motion-Occupancy-Base/blob/main/media/smpls.png?raw=true" width="45%">
 </p>
 
 ## Steps
