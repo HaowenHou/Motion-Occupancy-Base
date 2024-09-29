@@ -1,8 +1,10 @@
 # Motion Occupancy Base 
 
-Official repository for gathering data of [*Revisit Human-Scene Interaction via Space Occupancy*](https://foruck.github.io/occu-page/) (ECCV 2024).
+Official repository for [*Revisit Human-Scene Interaction via Space Occupancy*](https://foruck.github.io/occu-page/) (ECCV 2024).
 
-This repository specifies the pipeline for gathering Motion Occupancy Base (MOB).
+# Motion Occupancy Base (MOB)
+
+The `prepare_data` folder specifies the pipeline for gathering Motion Occupancy Base (MOB).
 
 ## Environment setup
 
@@ -64,6 +66,50 @@ This tutorial takes AMASS as an example. For the datasets in AMASS, download fro
     Run `generate_data.py`, which processes the data snippets, and saves them into `.npy` files.
     
     Here are some sample npy files processed from AMASS: [Google Drive link](https://drive.google.com/drive/folders/1VC4FJnfARNQbdYiaVKjHMnRAGjXvXNHp?usp=sharing)
+
+# Training
+
+The training code is in the `training` folder.
+
+## Environment
+
+Create the conda env from `environment.yml`.
+
+Download SMPL models and put them in `datasets/smpl_models`:
+
+<p align="center">
+    <img src="https://github.com/HaowenHou/Motion-Occupancy-Base/blob/main/media/smpls.png?raw=true" width="90%">
+</p>
+
+## Steps
+
+1. Split the dataset.
+
+    In `split_data.py`, specify `DATA_DIR` to the root of the dataset dir, and `SPLIT_DIR` to the destination dir. `mid_snip_dict.pkl` should be put in the destination dir.
+
+    Run `split_data.py`.
+
+2. Calculate mean and std.
+
+    In the config file, like `configs/config.yml`, 
+
+    set `SPLIT_DIR` to the same as in step 1;
+    
+    set `CALC_NORM` to `true`.
+
+    Run `train.py`.
+
+    Set `CALC_NORM` back to `false`.
+
+3. Train.
+
+    Run `train.py`
+
+## Notes
+
+The args specified in CLI can override those in config, e.g., `python train.py DEVICE=0 RUN_NAME=baseline`.
+
+The `smplx1` is slightly modified from the `smplx` lib.
 
 ## Citation
 

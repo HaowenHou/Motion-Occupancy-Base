@@ -1,0 +1,154 @@
+DEVICE: 0
+LOGGING_LEVEL: INFO
+STAGE: PLACE_HOLDER
+RUN_NAME: PLACE_HOLDER
+
+DESCRIPTION: PlaceHolder
+
+MODEL:
+  IN_DIM: PH
+  OUT_DIM: PH
+  JOINT_INDIM: PH
+  TRAJ_DIM: PH
+  NAME: CTRL_TRANSF
+  RANDOM: true
+  BASE_MOTION_TRANSF:
+    GATING_DROPOUT: 0.1
+    GATING_HIDDEN_SIZE: 512
+    USE_EXPERTS: false
+    EXPERT_NUM: 1
+    EXPERT_HIDDEN_SIZE: 512
+    QUERY_NUM: 5
+    TRANSF_DROPOUT: 0.0
+  CTRL_TRANSF:
+    FEATURE_DIM: 512
+    NUM_HEADS: 8
+    MID_LAYERS: 2
+    TRANSF_DROPOUT: 0.0
+
+TRAIN:
+  TRAIN_NAME: open
+  SEED: 0
+  DEBUG: false
+
+  SEP_CTRLS: true # Spearate ctrl signals as input.
+
+  # Joints & Traj data.
+  PAST_KF: 1
+  FUTURE_KF: 1
+  USE_EVEL: false # fixed root evel. false better.
+  USE_NXT_EVEL: true # true better.
+  USE_LIMB_TRAJ: true
+  SS_TRAJ: true
+  SS_LIMB_TRAJ: true
+  DROP_PTRAJ: 0.0
+  DROP_TGT: 0.0
+  USE_FCONTACT: true
+  LINEAR_FCONTACT: false
+
+  USE_TARGET: true
+
+  # Voxel.
+  USE_VOX: true
+  USE_BPS: false
+  BATCH_VOX: true
+  VOX_ON_GPU: true
+  NORM_VOX: false
+  VOX_TO_MEM: true
+  GRID_SIZE: 25
+  GRID_UNIT: 0.08
+  PRECREATE_GRID: true
+  DROP_VOX: true
+  # Field.
+  USE_FIELD: true
+  ALPHA_COEFF: 6
+  SPECIFY_ALPHA: false # always false
+  ALPHA_VALUE: 0.01 # aborted
+  FIX_ALPHA: true # always true
+  DIST_OFFSET: 0.15
+  CLIP_DV: true
+  DV_LOG: true # aborted
+  DV_MAX: 0.2 # aborted
+  CLIP_VEL: false # aborted
+  VEL_MAX: 0.22 # aborted
+  CLIP_COEFF: 1.05
+  USE_FLOSS: true
+  FLOSS_RATIO: 0.2
+  USE_VLOSS: true
+  VLOSS_RATIO: 10.0
+  REAL_FIELD: true
+  CLOSE_SW: false
+  CLOSE_LABEL: false
+
+  # Loss.
+  USE_GRID_LOSS: false
+  LG_RATIO: 2.0
+  L1_RATIO: 1.0
+  L2_RATIO: 2.0
+
+  # Save checkpoint and resume.
+  SAVE_TRAIN_CKPT: true
+  RESUME: false
+  RESUME_CKPT: results/TRAIN/checkpoint.pth
+
+  # Norm.
+  USE_NORM: true
+  CALC_NORM: false # Calc norm in train.py
+  CALC_NORM_RATIO: 1.0 # The portion of data used to calc norm.
+  CALC_NORM_ITER: 4000 # The num of data used to calc norm. Adopt whichever is smaller.
+
+  TO_GPU_FIRST: false
+  BATCH_SIZE: 256
+  NUM_WORKERS: 12
+  PREFETCH: 2
+  LEARNING_RATE: 1.0e-4
+  LEARNING_RATE_MIN: 1.0e-6
+  WEIGHT_DECAY: 1.0e-4
+  EPOCHS: 2550
+  ITER_PER_EP: 500
+
+  OPTIMIZER: 'AdamW'
+  SCHEDULER: 'CosineAnnealingLR'
+  RESTART_PERIOD: 10
+  RESTART_MULT: 2
+
+  SHOW_ITER: false
+  LOG_FREQ: 50
+  SAVE_CHECKPOINT: true
+  BACKUP_CODE: true
+  IGNORE_WARNINGS: true
+
+  # Scheduled sampling.
+  ROLLOUT_FRAMES: 4
+  TEACHER_EPOCHS: 0
+  RAMPING_EPOCHS: 30
+  STUDENT_EPOCHS: 10000
+  STUDENT_RATIO: 0.8
+
+TEST:
+  ROLLOUT_FRAMES: 4
+  BATCH_SIZE: 1024
+  NUM_WORKERS: 16
+
+INFER:
+  INFER_NAME: infer
+  SPLIT: TEST
+  SNIP_LEN: 29
+  INFER_LEN: 100
+  DROP_TGT: 0.
+  TGT_ROOT_ONLY: false
+  IGNORE_WARNINGS: true
+  ANI_SAVE_DIR: results_vis/test
+
+ASSETS:
+  NPY_DIR: datasets/amass_ref
+  SPLIT_DIR: datasets/splits/amass_splits
+  OCCUG_DIR: datasets/occu_g_25
+  SNIP_DICT_NAME: mid_snip_dict.pkl
+  MEAN_STD_NAME: mean_std_1pf1ff.pt
+  SMPL_DIR: datasets/smpl_models
+  OCCUG_REF_DIR: datasets/occu_g_25_ref
+  BASIS_PATH: utils/basis_1024.npy
+
+  RESULT_DIR: results
+  CHECKPOINT: results/TRAIN_2023-11-12-09-23-41_babel_dvox_realf_6alpha_all/epoch_150.pt
